@@ -1,23 +1,25 @@
 package Selendroid.Runner;
 
 
-import AppiumSupport.AppiumLauncher;
-import AppiumSupport.AppiumSupport;
 import AppiumSupport.AppiumBaseClass;
+import AppiumSupport.SeleniumBaseClass;
 import Config.Config;
 import Logger.Log;
-import PageObjects.PageObjectManager;
+import PageObjects.Mobile.ScreenObjectManager;
+import PageObjects.Web.PageObjectManager;
 import io.appium.java_client.AppiumDriver;
 import io.cucumber.testng.*;
+import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
 
 import java.net.MalformedURLException;
 import java.util.Properties;
 
 @CucumberOptions(
-        features = "src/test/java/Selendroid/Feature",
-        glue = "Selendroid/Steps",
-        tags = "@PopUpWindow",
+        features = "src/test/java/Selendroid",
+        glue = "Selendroid",
+        tags = "@HomePage",
         plugin = {
                 "pretty",
                 "json:target/cucumber_reports/Cucumber.json",
@@ -27,25 +29,38 @@ import java.util.Properties;
 public class CucumberRunner {
     private TestNGCucumberRunner testNGCucumberRunner;
     public static Properties config;
+    public static ScreenObjectManager screenObjectManager;
     public static PageObjectManager pageObjectManager;
-    private AppiumDriver driver;
+    protected AppiumDriver driver;
+    protected WebDriver chromeDriver;
 
     @BeforeMethod()
-    public void appLaunch() {
+    public void appLaunch(ITestContext testContext) {
         Log.info("Read configuration properties");
         config = Config.getAllProperties();
+        if (testContext.getCurrentXmlTest().getName().contains("Mobile")) {
 
 //        Log.info("Launch Appium Server");
 //        AppiumLauncher.runProcess(false, "appium -a 0.0.0.0 -p 4723");
 
-        Log.info("Launch Application");
-        try {
-            this.driver = AppiumBaseClass.forAndroid().build(config.getProperty("APP_PATH"), config.getProperty("APP_NAME"), config.getProperty("PLATFORM_VERSION"), config.getProperty("DEVICE_NAME"), config.getProperty("APP_PACKAGE"), config.getProperty("APP_ACTIVITY"));
-        } catch (MalformedURLException e) {
-            Log.error("Appium URL is not valid");
-        }
+            Log.info("Launch Application");
+            try {
+                this.driver = AppiumBaseClass.forAndroid().build(config.getProperty("APP_PATH"), config.getProperty("APP_NAME"), config.getProperty("PLATFORM_VERSION"), config.getProperty("DEVICE_NAME"), config.getProperty("APP_PACKAGE"), config.getProperty("APP_ACTIVITY"));
+            } catch (MalformedURLException e) {
+                Log.error("Appium URL is not valid");
+            }
 
-        pageObjectManager = new PageObjectManager(driver);
+            screenObjectManager = new ScreenObjectManager(driver);
+        }
+        if (testContext.getCurrentXmlTest().getName().contains("Web")) {
+
+            Log.info("Launch Url");
+
+            this.chromeDriver = SeleniumBaseClass.forChrome().build(config.getProperty("CHROME_EXECUTABLE_PATH"));
+            chromeDriver.manage().window().maximize();
+
+            pageObjectManager = new PageObjectManager(chromeDriver);
+        }
     }
 
     @BeforeClass(alwaysRun = true)
@@ -75,7 +90,12 @@ public class CucumberRunner {
 
     @AfterMethod
     public void appClose() {
-        driver.quit();
+        if(driver!=null) {
+            driver.quit();
+        }
+        if(chromeDriver!=null) {
+            chromeDriver.quit();
+        }
         //    Log.endTestCase(scenario.getName(), scenario.getStatus().name());
     }
 }
