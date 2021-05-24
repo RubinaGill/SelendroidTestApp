@@ -16,7 +16,6 @@ import java.io.File;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
-import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.testng.Assert.assertEquals;
 
 public class APISteps extends CucumberRunner {
@@ -31,7 +30,7 @@ public class APISteps extends CucumberRunner {
 
     @When("user sends Get API request of user from page {int}")
     public void user_sends_get_api_request_of_user_from_page(Integer pageNumber) {
-        path = "users?page=2";
+        path = "users?page="+pageNumber;
         response = given().get(path).then().extract().response();
     }
 
@@ -49,11 +48,13 @@ public class APISteps extends CucumberRunner {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        for (int n = 0; n < jsonArray.size(); n++) {
-            JSONObject object = (JSONObject) jsonArray.get(n);
-            if (object.get("id").toString().equals(id.toString())) {
-                Assert.assertEquals(object.get("first_name"), expectedName);
-                return;
+        if (jsonArray != null) {
+            for (Object o : jsonArray) {
+                JSONObject object = (JSONObject) o;
+                if (object.get("id").toString().equals(id.toString())) {
+                    Assert.assertEquals(object.get("first_name"), expectedName);
+                    return;
+                }
             }
         }
         Assert.fail("user with id " + id + " is not available");

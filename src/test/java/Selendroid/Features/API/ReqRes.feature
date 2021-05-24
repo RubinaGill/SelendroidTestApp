@@ -9,7 +9,7 @@ Feature:verify response of user API
     And user verifies first name of id 10 is 'Byron'
 
   @PostUser
-  Scenario: validate first name from API response
+  Scenario: validate post user request
     Given the users endpoint exists
     When user sends Post API request of users with name as 'Brynt' and job as 'BA'
     Then user must get status code 201

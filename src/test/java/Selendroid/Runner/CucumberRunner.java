@@ -21,9 +21,7 @@ import java.util.Properties;
         glue = "Selendroid/Steps",
         tags = "@API",
         plugin = {
-                "pretty",
-                "json:target/cucumber_reports/Cucumber.json",
-                "rerun:target/cucumber-reports/rerun.txt"
+                "pretty"
         }
 )
 public class CucumberRunner {
