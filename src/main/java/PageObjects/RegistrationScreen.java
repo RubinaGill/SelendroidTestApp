@@ -16,31 +16,31 @@ public class RegistrationScreen extends AbstractScreen {
     @AndroidFindBy(xpath = "//*[@text='Username']")
     private MobileElement userNameLabel;
 
-    @AndroidFindBy(xpath = "//*[@class='android.widget.EditText'][1]")
+    @AndroidFindBy(id = "io.selendroid.testapp:id/inputUsername")
     private MobileElement userNameTextBox;
 
     @AndroidFindBy(xpath = "//*[@text='E-Mail']")
     private MobileElement emailLabel;
 
-    @AndroidFindBy(xpath = "//*[@class='android.widget.EditText'][2]")
+    @AndroidFindBy(accessibility = "email of the customer")
     private MobileElement emailTextBox;
 
     @AndroidFindBy(xpath = "//*[@text='Password']")
     private MobileElement passwordLabel;
 
-    @AndroidFindBy(xpath = "//*[@class='android.widget.EditText'][3]")
+    @AndroidFindBy(id = "io.selendroid.testapp:id/inputPassword")
     private MobileElement passwordTextBox;
 
     @AndroidFindBy(xpath = "//*[@text='Name']")
     private MobileElement nameLabel;
 
-    @AndroidFindBy(xpath = "//*[@class='android.widget.EditText'][4]")
+    @AndroidFindBy(id = "io.selendroid.testapp:id/inputName")
     private MobileElement nameTextBox;
 
     @AndroidFindBy(xpath = "//*[@text='Programming Languge']")
     private MobileElement programmingLanguageLabel;
 
-    @AndroidFindBy(xpath = "//*[@class='android.widget.Spinner']")
+    @AndroidFindBy(id = "android:id/text1")
     private MobileElement programmingLanguageDropdown;
 
     @AndroidFindBy(xpath = "//*[@text='TandC']")
@@ -53,28 +53,28 @@ public class RegistrationScreen extends AbstractScreen {
     private MobileElement userVerifyButton;
 
     @AndroidFindBy(id = "label_name_data")
-    private MobileElement nameFieldText;
+    private MobileElement nameFieldTextLabel;
 
     @AndroidFindBy(id = "label_username_data")
-    private MobileElement userNameFieldText;
+    private MobileElement userNameFieldTextLabel;
 
     @AndroidFindBy(id = "label_password_data")
-    private MobileElement passwordFieldText;
+    private MobileElement passwordFieldTextLabel;
 
     @AndroidFindBy(id = "label_email_data")
-    private MobileElement emailFieldText;
+    private MobileElement emailFieldTextLabel;
 
     @AndroidFindBy(id = "label_preferedProgrammingLanguage_data")
-    private MobileElement plFieldText;
+    private MobileElement programmingLanguageFieldTextLabel;
 
-    @AndroidFindBy(xpath = "//*[@text='Register User']")
+    @AndroidFindBy(id = "io.selendroid.testapp:id/btnRegisterUser")
+    private MobileElement verifyUserButton;
+
+    @AndroidFindBy(id = "io.selendroid.testapp:id/buttonRegisterUser")
     private MobileElement registerUserButton;
 
     @AndroidFindBy(xpath = "//*[@text='Waiting Dialog']")
     private MobileElement waitDialogTxt;
-
-    @AndroidFindBy(xpath = "//*[@text='Show Progress Bar for a while']")
-    private MobileElement showProgressBarButton;
 
     public RegistrationScreen(AppiumDriver<MobileElement> driver) {
         super(driver);
@@ -83,6 +83,7 @@ public class RegistrationScreen extends AbstractScreen {
     }
 
     public boolean isUserNameFieldPresent() {
+        hideKeyboard();
         return userNameLabel.isDisplayed() && userNameTextBox.isDisplayed();
     }
 
@@ -107,6 +108,7 @@ public class RegistrationScreen extends AbstractScreen {
     }
 
     public boolean isRegisterUserFieldPresent() {
+        hideKeyboard();
         return userVerifyButton.isDisplayed();
     }
 
@@ -131,6 +133,7 @@ public class RegistrationScreen extends AbstractScreen {
     }
 
     public void enterName(String name) {
+        clearTextBox(nameTextBox);
         enterText(nameTextBox, name);
     }
 
@@ -143,7 +146,31 @@ public class RegistrationScreen extends AbstractScreen {
         clickButton(acceptAddsCheckbox);
     }
 
-    public void clickRegisterUserButton() {
+    public void clickVerifyUserButton() {
+        clickButton(verifyUserButton);
+    }
+
+    public String getUserName() {
+        return getText(userNameFieldTextLabel);
+    }
+
+    public String getEmail() {
+        return getText(emailFieldTextLabel);
+    }
+
+    public String getPassword() {
+        return getText(passwordFieldTextLabel);
+    }
+
+    public String getName() {
+        return getText(nameFieldTextLabel);
+    }
+
+    public String getProgrammingLanguage() {
+        return getText(programmingLanguageFieldTextLabel);
+    }
+
+    public void clickOnRegisterUserButton() {
         clickButton(registerUserButton);
     }
 }

@@ -30,7 +30,7 @@ public class RegistrationSteps extends CucumberRunner {
     }
 
     @Then("user enters the details - {string}, {string}, {string}, {string}, {string}")
-    public void user_enters_the_details_as(String userName,String email,String password,String name,String programmingLanguage) {
+    public void user_enters_the_details_as(String userName, String email, String password, String name, String programmingLanguage) {
         registrationScreen.enterUsername(userName);
         registrationScreen.enterEmailId(email);
         registrationScreen.enterPassword(password);
@@ -45,19 +45,21 @@ public class RegistrationSteps extends CucumberRunner {
 
     @Then("user taps on Register User \\(verify)")
     public void user_taps_on_register_user_verify() {
-        registrationScreen.clickRegisterUserButton();
+        registrationScreen.clickVerifyUserButton();
     }
 
-    @Then("user verifies details on the next screen")
-    public void user_verifies_details_on_the_next_screen() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @Then("user verifies details - {string}, {string}, {string}, {string}, {string} on the next screen")
+    public void user_verifies_details_on_the_next_screen(String userName, String email, String password, String name, String programmingLanguage) {
+        Assert.assertEquals(registrationScreen.getUserName(), userName, "username is not as entered");
+        Assert.assertEquals(registrationScreen.getEmail(), email, "email is not as entered");
+        Assert.assertEquals(registrationScreen.getPassword(), password, "password is not as entered");
+        Assert.assertEquals(registrationScreen.getName(), name, "name is not as entered");
+        Assert.assertEquals(registrationScreen.getProgrammingLanguage(), programmingLanguage, "programming language is not as entered");
     }
 
     @Then("user tap on Register User")
     public void user_tap_on_register_user() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        registrationScreen.clickOnRegisterUserButton();
     }
 
 }

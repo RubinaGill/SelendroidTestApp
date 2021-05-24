@@ -32,16 +32,51 @@ Feature: Home Screen
       | TestUser | mercedes     |
 
   @UserRegistration
-  Scenario: Validate a new user is able to register
+  Scenario Outline: Validate a new user is able to register
     Given user launches the app and is on home screen
     When user taps on File logo button
     Then user verifies the title as 'Welcome to register a new User'
     And user verifies the UI elements of register screen
     Then user verifies the name field is pre-populated with 'Mr. Burns'
     And user verifies default language is selected as 'Ruby'
-    Then user enters the details - 'TestUser', 'testuser@test.com', 'pass@Test', 'testName', 'Java'
+    Then user enters the details - '<username>', '<email>', '<password>', '<name>', '<programmingLanguage>'
     And user accepts adds
     Then user taps on Register User (verify)
-    And user verifies details on the next screen
+    And user verifies details - '<username>', '<email>', '<password>', '<name>', '<programmingLanguage>' on the next screen
     And user tap on Register User
     Then user must be navigated back to home page
+    Examples:
+      | username | email             | password  | name     | programmingLanguage |
+      | TestUser | testuser@test.com | pass@Test | testName | Java                |
+
+
+  @ProgressBarRegistration
+  Scenario: Validate user is navigated to registration screen after progress bar completes
+    Given user launches the app and is on home screen
+    When user taps on Show Progress bar
+    Then user waits for progress bar to disappear
+    And user verifies the UI elements of register screen
+
+  @ToastMessage
+  Scenario: Validate user is able to view toast message
+    Given user launches the app and is on home screen
+    When user taps on Displays a toast button
+    Then user verifies toast 'Hello selendroid toast!' on home screen
+
+  @PopUpWindow
+  Scenario: Validate user is able to dismiss pop-up window
+    Given user launches the app and is on home screen
+    When user taps on Display Pop up Window button
+    Then user is able to dismiss the popup
+
+  @UnhandledException
+  Scenario: Validate user is able to dismiss pop-up window
+    Given user launches the app and is on home screen
+    When user taps on Press to throw unhandled exception button
+    Then user app is stopped
+
+  @UnhandledCustomException
+  Scenario: Validate user is able to dismiss pop-up window
+    Given user launches the app and is on home screen
+    When user types 'test' to throw unhandled exception button
+    Then user app keeps stopping

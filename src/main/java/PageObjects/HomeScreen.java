@@ -62,6 +62,27 @@ public class HomeScreen extends AbstractScreen {
     @AndroidFindBy(id = "io.selendroid.testapp:id/topLevelElementTest")
     private MobileElement focusOnLayoutButton;
 
+    @AndroidFindBy(xpath = "//*[@text='Show Progress Bar for a while']")
+    private MobileElement showProgressBarButton;
+
+    @AndroidFindBy(id = "android:id/progress")
+    private MobileElement showProgressBar;
+
+    @AndroidFindBy(xpath = "//android.widget.Toast[1]")
+    private MobileElement toastMessage;
+
+    @AndroidFindBy(xpath = "//android.widget.Toast[1]")
+    private MobileElement popUpWindow;
+
+    @AndroidFindBy(xpath = "//*[@text='selendroid-test-app has stopped']")
+    private MobileElement appStoppedAlert;
+
+    @AndroidFindBy(xpath = "//*[@text='selendroid-test-app keeps stopping']")
+    private MobileElement appKeepStoppingALert;
+
+    @AndroidFindBy(xpath = "//*[@text='Close app']")
+    private MobileElement closeAppButton;
+
     public boolean isWelcomeTextPresent() {
         return isElementPresent(welcomeText);
     }
@@ -136,5 +157,49 @@ public class HomeScreen extends AbstractScreen {
 
     public void clickRegisterLogoButton() {
         clickButton(startRegistrationButton);
+    }
+
+    public void showProgressBar() {
+        clickButton(showProgressButton);
+    }
+
+    public boolean waitUntilProgressBarIsVisible() {
+        return waitTillElementIsVisible(showProgressBar, 100);
+    }
+
+    public void clickOnToastButton() {
+        clickButton(displayToastButton);
+    }
+
+    public String getToastMessage() {
+        return toastMessage.getAttribute("name");
+    }
+
+    public void clickOnPopUpWindow() {
+        clickButton(displayWindowPopupButton);
+    }
+
+    public void dismissPopUpWindow() {
+        pressByCoordinates(757,1434);
+    }
+
+    public boolean isPopUpWindowPresent() {
+        return isElementPresent(popUpWindow);
+    }
+
+    public void clickThrowExceptionButton() {
+        clickButton(unhandledExceptionButton);
+    }
+
+    public boolean isAppStopAlertPresent() {
+        return isElementPresent(appStoppedAlert);
+    }
+
+    public void enterException(String exceptionText) {
+        enterText(throwExceptionTextBox, exceptionText);
+    }
+
+    public boolean isAppStoppingAlertPresent() {
+        return isElementPresent(appKeepStoppingALert);
     }
 }

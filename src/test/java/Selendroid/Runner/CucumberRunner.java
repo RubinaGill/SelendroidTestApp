@@ -17,7 +17,7 @@ import java.util.Properties;
 @CucumberOptions(
         features = "src/test/java/Selendroid/Feature",
         glue = "Selendroid/Steps",
-        tags = "@UserRegistration",
+        tags = "@PopUpWindow",
         plugin = {
                 "pretty",
                 "json:target/cucumber_reports/Cucumber.json",
@@ -30,7 +30,7 @@ public class CucumberRunner {
     public static PageObjectManager pageObjectManager;
     private AppiumDriver driver;
 
-    @BeforeSuite()
+    @BeforeMethod()
     public void appLaunch() {
         Log.info("Read configuration properties");
         config = Config.getAllProperties();
@@ -73,10 +73,9 @@ public class CucumberRunner {
         testNGCucumberRunner.finish();
     }
 
-    @AfterSuite
+    @AfterMethod
     public void appClose() {
-        AppiumSupport.instance.appClose();
-        //     AppiumSupport.instance.stopAppiumServer();
+        driver.quit();
         //    Log.endTestCase(scenario.getName(), scenario.getStatus().name());
     }
 }

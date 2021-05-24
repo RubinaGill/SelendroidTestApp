@@ -7,6 +7,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.touch.WaitOptions;
 import io.appium.java_client.touch.offset.PointOption;
 import org.apache.commons.lang.StringUtils;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
@@ -19,6 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static io.appium.java_client.touch.WaitOptions.waitOptions;
+import static io.appium.java_client.touch.offset.PointOption.point;
+import static java.time.Duration.ofSeconds;
+
 public class AbstractScreen {
     private WebDriverWait wait;
     AppiumDriver driver;
@@ -30,7 +35,7 @@ public class AbstractScreen {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
 
         //explicit wait
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, 60);
 
     }
 
@@ -97,6 +102,17 @@ public class AbstractScreen {
     void clickButton(WebElement element) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Use this method to hide keyboard
+     */
+    void hideKeyboard() {
+        try {
+            driver.hideKeyboard();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -230,6 +246,18 @@ public class AbstractScreen {
         return dropdown.getFirstSelectedOption().getText();
     }
 
+    /**
+     * tap at particular coordinates
+     *
+     * @param x xcoordinates
+     * @param y ycoordinates
+     */
+    public void pressByCoordinates(int x, int y) {
+        new TouchAction(driver)
+                .press(point(x, y))
+                .perform();
+    }
+
 
     void waitForDuration(int timeInMilliSeconds) {
         try {
@@ -251,6 +279,30 @@ public class AbstractScreen {
             wait.until(ExpectedConditions.visibilityOf(element)).isDisplayed();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * An expectation for wait till checking that an element, known to be present on the DOM of a page, is
+     * visible. Visibility means that the element is not only displayed but also has a height and
+     * width that is greater than 0.
+     *
+     * @param element             the WebElement
+     * @param timeInSecondsToWait time in seconds to wait
+     */
+    boolean waitTillElementIsVisible(WebElement element, int timeInSecondsToWait) {
+        try {
+            for (int counter = 0; counter < timeInSecondsToWait; counter++) {
+                try {
+                    wait.until(ExpectedConditions.visibilityOf(element));
+                    Thread.sleep(1000);
+                } catch (Exception e) {
+                    return true;
+                }
+            }
+            return !isElementPresent(element);
+        } catch (Exception e) {
+            return false;
         }
     }
 
@@ -299,13 +351,18 @@ public class AbstractScreen {
             Point point = element.getLocation();
             TouchAction ta = new TouchAction(driver);
             MultiTouchAction ma = new MultiTouchAction(driver);
-            ta.press(PointOption.point(point.getX(), point.getY() + 100))
-                    .waitAction(WaitOptions.waitOptions(java.time.Duration.ofMillis(1000)))
-                    .moveTo(PointOption.point(point.getX(), -point.getY()))
+            ta.press(point(point.getX(), point.getY() + 100))
+                    .waitAction(waitOptions(java.time.Duration.ofMillis(1000)))
+                    .moveTo(point(point.getX(), -point.getY()))
                     .release();
             ma.add(ta).perform();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    void dismissAlert() {
+        Alert alert = driver.switchTo().alert();
+        alert.dismiss();
     }
 }

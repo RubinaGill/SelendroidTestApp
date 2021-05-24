@@ -60,4 +60,57 @@ public class HomeScreenSteps extends CucumberRunner {
     public void user_taps_on_file_logo_button() {
         homeScreen.clickRegisterLogoButton();
     }
+
+    @When("user taps on Show Progress bar")
+    public void user_taps_on_show_progress_bar() {
+        homeScreen.showProgressBar();
+    }
+
+    @Then("user waits for progress bar to disappear")
+    public void user_waits_for_progress_bar_to_disappear() {
+        Assert.assertTrue(homeScreen.waitUntilProgressBarIsVisible(), "user is unable to wait for progress bar to complete");
+    }
+
+    @When("user taps on Displays a toast button")
+    public void user_taps_on_displays_a_toast_button() {
+        homeScreen.clickOnToastButton();
+    }
+
+    @Then("user verifies toast {string} on home screen")
+    public void user_verifies_toast_on_home_screen(String message) {
+        Assert.assertEquals(homeScreen.getToastMessage(), message, "user is unable to view toast message");
+    }
+
+    @When("user taps on Display Pop up Window button")
+    public void user_taps_on_display_pop_up_window_button() {
+        homeScreen.clickOnPopUpWindow();
+    }
+
+    @Then("user is able to dismiss the popup")
+    public void user_is_able_to_dismiss_the_popup() {
+        homeScreen.dismissPopUpWindow();
+        Assert.assertTrue(homeScreen.isEnButtonPresent(), "user is not able to dismiss popup window");
+    }
+
+    @When("user taps on Press to throw unhandled exception button")
+    public void user_taps_on_press_to_throw_unhandled_exception_button() {
+     homeScreen.clickThrowExceptionButton();
+    }
+
+    @Then("user app is stopped")
+    public void user_app_is_stopped() {
+       Assert.assertTrue(homeScreen.isAppStopAlertPresent(),"user is still on home page");
+       Assert.assertFalse(homeScreen.isEnButtonPresent(),"user is not on home screen");
+    }
+
+    @When("user types {string} to throw unhandled exception button")
+    public void user_types_to_throw_unhandled_exception_button(String exceptionText) {
+        homeScreen.enterException(exceptionText);
+    }
+
+    @Then("user app keeps stopping")
+    public void user_app_keeps_stopping() {
+        Assert.assertTrue(homeScreen.isAppStoppingAlertPresent(),"user is still on home page");
+        Assert.assertFalse(homeScreen.isEnButtonPresent(),"user is not on home screen");
+    }
 }
