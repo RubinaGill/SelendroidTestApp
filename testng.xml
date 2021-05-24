@@ -12,4 +12,9 @@
             <class name="Selendroid.Runner.CucumberRunner"/>
         </classes>
     </test>
+    <test name="ApiTest">
+        <classes>
+            <class name="Selendroid.Runner.CucumberRunner"/>
+        </classes>
+    </test>
 </suite>

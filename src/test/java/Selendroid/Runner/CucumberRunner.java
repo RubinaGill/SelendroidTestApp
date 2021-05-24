@@ -17,9 +17,9 @@ import java.net.MalformedURLException;
 import java.util.Properties;
 
 @CucumberOptions(
-        features = "src/test/java/Selendroid",
-        glue = "Selendroid",
-        tags = "@HomePage",
+        features = "src/test/java/Selendroid/Features",
+        glue = "Selendroid/Steps",
+        tags = "@API",
         plugin = {
                 "pretty",
                 "json:target/cucumber_reports/Cucumber.json",

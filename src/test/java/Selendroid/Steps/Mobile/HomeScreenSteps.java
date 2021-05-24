@@ -1,4 +1,4 @@
-package Selendroid.Mobile.Steps;
+package Selendroid.Steps.Mobile;
 
 import PageObjects.Mobile.HomeScreen;
 import Selendroid.Runner.CucumberRunner;

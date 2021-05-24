@@ -1,4 +1,4 @@
-package Selendroid.Web.Steps;
+package Selendroid.Steps.Web;
 
 import PageObjects.Web.HomePage;
 import Selendroid.Runner.CucumberRunner;
