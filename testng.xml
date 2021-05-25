@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Selendroid-JQuery-ReqRes-Suite" parallel="tests" thread-count="1">
-    <test name="MobileTest">
-        <classes>
-            <class name="Selendroid.Runner.CucumberRunner"/>
-        </classes>
-    </test>
-    <test name="WebTest">
-        <classes>
-            <class name="Selendroid.Runner.CucumberRunner"/>
-        </classes>
-    </test>
+<suite name="Selendroid-JQuery-ReqRes-Suite">
     <test name="ApiTest">
         <classes>
-            <class name="Selendroid.Runner.CucumberRunner"/>
+            <class name="Selendroid.Runner.CucumberRunner">
+            </class>
         </classes>
     </test>
 </suite>
