@@ -1,4 +1,4 @@
-@HomePage
+@Web
 Feature:perform actions on webElements
 
   @DragComponent

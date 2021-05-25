@@ -1,4 +1,4 @@
-@HomeScreen
+@Mobile
 Feature: Home Screen
 
   @HomeScreenElements

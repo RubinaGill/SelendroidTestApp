@@ -1,12 +1,12 @@
 package Selendroid.Steps.Mobile;
 
 import PageObjects.Mobile.RegistrationScreen;
-import Selendroid.Runner.CucumberRunner;
+import Selendroid.Steps.TestContext;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 
-public class RegistrationSteps extends CucumberRunner {
-    RegistrationScreen registrationScreen = screenObjectManager.getRegistrationScreen();
+public class RegistrationSteps {
+    RegistrationScreen registrationScreen = TestContext.screenObjectManager.getRegistrationScreen();
 
     @Then("user verifies the UI elements of register screen")
     public void user_verifies_the_ui_elements_of_register_screen() {

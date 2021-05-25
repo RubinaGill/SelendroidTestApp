@@ -1,18 +1,18 @@
 package Selendroid.Steps.Web;
 
 import PageObjects.Web.HomePage;
-import Selendroid.Runner.CucumberRunner;
+import Selendroid.Steps.TestContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
-public class HomePageSteps extends CucumberRunner {
-    HomePage homePage = pageObjectManager.getHomePage();
+public class HomePageSteps {
+    HomePage homePage = TestContext.pageObjectManager.getHomePage();
 
     @Given("user navigates to website")
     public void user_navigates_to_website() {
-        homePage.navigateToWebsite(config.getProperty("URL"));
+        homePage.navigateToWebsite(TestContext.config.getProperty("URL"));
     }
 
     @When("user selects option as {string}")

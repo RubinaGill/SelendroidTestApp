@@ -1,14 +1,14 @@
 package Selendroid.Steps.Mobile;
 
 import PageObjects.Mobile.HomeScreen;
-import Selendroid.Runner.CucumberRunner;
+import Selendroid.Steps.TestContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
-public class HomeScreenSteps extends CucumberRunner {
-    HomeScreen homeScreen = screenObjectManager.getHomeScreenPage();
+public class HomeScreenSteps {
+    HomeScreen homeScreen = TestContext.screenObjectManager.getHomeScreenPage();
 
     @Given("user launches the app and is on home screen")
     public void user_launches_the_app_and_is_on_home_screen() {
