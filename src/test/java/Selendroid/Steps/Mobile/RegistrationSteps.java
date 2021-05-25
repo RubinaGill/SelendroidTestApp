@@ -7,7 +7,6 @@ import org.testng.Assert;
 
 public class RegistrationSteps extends CucumberRunner {
     RegistrationScreen registrationScreen = screenObjectManager.getRegistrationScreen();
-   // RegistrationScreen registrationScreen = new RegistrationScreen(driver);
 
     @Then("user verifies the UI elements of register screen")
     public void user_verifies_the_ui_elements_of_register_screen() {

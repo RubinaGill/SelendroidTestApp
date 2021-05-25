@@ -9,10 +9,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class RegistrationScreen extends AbstractScreen {
 
-
-    @AndroidFindBy(xpath = "//*[@text='Welcome to register a new User']")
-    private MobileElement registerNewUserTitle;
-
     @AndroidFindBy(xpath = "//*[@text='Username']")
     private MobileElement userNameLabel;
 
@@ -72,9 +68,6 @@ public class RegistrationScreen extends AbstractScreen {
 
     @AndroidFindBy(id = "io.selendroid.testapp:id/buttonRegisterUser")
     private MobileElement registerUserButton;
-
-    @AndroidFindBy(xpath = "//*[@text='Waiting Dialog']")
-    private MobileElement waitDialogTxt;
 
     public RegistrationScreen(AppiumDriver<MobileElement> driver) {
         super(driver);

@@ -17,7 +17,7 @@ public class HomePage extends AbstractPage {
     private WebElement dropTarget;
 
     @FindBy(xpath = "//*[@id='droppable']/p")
-    private WebElement droppedtext;
+    private WebElement droppedText;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -38,7 +38,7 @@ public class HomePage extends AbstractPage {
     }
 
     public boolean isDragAndDropSuccessful() {
-        return getText(droppedtext).equals("Dropped!");
+        return getText(droppedText).equals("Dropped!");
     }
 
     public void selectOptionsFromSelectable(String option1, String option2, String option3) {

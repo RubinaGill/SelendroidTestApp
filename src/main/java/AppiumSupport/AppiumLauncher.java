@@ -1,11 +1,15 @@
 package AppiumSupport;
 
+import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 public class AppiumLauncher {
+    private static AppiumDriverLocalService server;
     private static final String[] WIN_RUNTIME = { "cmd.exe", "/C" };
     private static final String[] OS_LINUX_RUNTIME = { "/bin/bash", "-c" };
 
@@ -38,5 +42,18 @@ public class AppiumLauncher {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public void startServer(String nodePath, String appiumJsPath, String appiumIp, String appiumPort) {
+//        AppiumDriverLocalService server = AppiumDriverLocalService.buildService(new AppiumServiceBuilder()
+//                .withAppiumJS(new File(nodePath))
+//                .usingPort(4723).withIPAddress("127.0.0.1"));
+        AppiumServiceBuilder serviceBuilder = new AppiumServiceBuilder();
+        serviceBuilder.usingAnyFreePort();
+//        serviceBuilder.usingDriverExecutable(new File(nodePath));
+//        serviceBuilder.withAppiumJS(new File(appiumJsPath));
+//        serviceBuilder.usingPort(Integer.parseInt(appiumPort));
+        serviceBuilder.withIPAddress("0.0.0.0");
+        server = AppiumDriverLocalService.buildService(serviceBuilder);
+        server.start();
     }
 }

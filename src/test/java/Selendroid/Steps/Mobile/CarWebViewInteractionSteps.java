@@ -7,7 +7,6 @@ import org.testng.Assert;
 
 public class CarWebViewInteractionSteps extends CucumberRunner {
     CarWebViewScreen carWebViewScreen = screenObjectManager.getCarWebViewScreen();
-  // CarWebViewScreen carWebViewScreen = new CarWebViewScreen(driver);
 
     @Then("user verifies the title as {string}")
     public void user_verifies_the_title_as(String expectedTitle) {

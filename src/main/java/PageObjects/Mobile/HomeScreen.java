@@ -78,7 +78,7 @@ public class HomeScreen extends AbstractScreen {
     private MobileElement appStoppedAlert;
 
     @AndroidFindBy(xpath = "//*[@text='selendroid-test-app keeps stopping']")
-    private MobileElement appKeepStoppingALert;
+    private MobileElement appKeepStoppingAlert;
 
     @AndroidFindBy(xpath = "//*[@text='Close app']")
     private MobileElement closeAppButton;
@@ -200,6 +200,6 @@ public class HomeScreen extends AbstractScreen {
     }
 
     public boolean isAppStoppingAlertPresent() {
-        return isElementPresent(appKeepStoppingALert);
+        return isElementPresent(appKeepStoppingAlert);
     }
 }
