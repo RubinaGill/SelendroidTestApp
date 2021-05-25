@@ -2,7 +2,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Selendroid-JQuery-ReqRes-Suite">
-    <test name="Regression">
+    <test name="Sanity">
         <classes>
             <class name="Selendroid.Runner.CucumberRunner"/>
         </classes>

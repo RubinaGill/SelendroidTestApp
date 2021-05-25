@@ -77,32 +77,32 @@ public class RegistrationScreen extends AbstractScreen {
 
     public boolean isUserNameFieldPresent() {
         hideKeyboard();
-        return userNameLabel.isDisplayed() && userNameTextBox.isDisplayed();
+        return isElementPresent(userNameLabel) && isElementPresent(userNameTextBox);
     }
 
     public boolean isEmailFieldPresent() {
-        return emailLabel.isDisplayed() && emailTextBox.isDisplayed();
+        return isElementPresent(emailLabel) && isElementPresent(emailTextBox);
     }
 
     public boolean isPasswordFieldPresent() {
-        return passwordLabel.isDisplayed() && passwordTextBox.isDisplayed();
+        return isElementPresent(passwordLabel) && isElementPresent(passwordTextBox);
     }
 
     public boolean isNameFieldPresent() {
-        return nameLabel.isDisplayed() && nameTextBox.isDisplayed();
+        return isElementPresent(nameLabel) && isElementPresent(nameTextBox);
     }
 
     public boolean isProgrammingLanguageFieldPresent() {
-        return programmingLanguageLabel.isDisplayed() && programmingLanguageDropdown.isDisplayed();
+        return isElementPresent(programmingLanguageLabel) && isElementPresent(programmingLanguageDropdown);
     }
 
     public boolean isTnCFieldPresent() {
-        return tnCLabel.isDisplayed() && acceptAddsCheckbox.isDisplayed();
+        return isElementPresent(tnCLabel) && isElementPresent(acceptAddsCheckbox);
     }
 
     public boolean isRegisterUserFieldPresent() {
         hideKeyboard();
-        return userVerifyButton.isDisplayed();
+        return isElementPresent(userVerifyButton);
     }
 
     public String getDefaultName() {

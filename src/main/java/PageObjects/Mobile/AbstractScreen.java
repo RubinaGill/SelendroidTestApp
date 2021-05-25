@@ -60,14 +60,6 @@ public class AbstractScreen {
         }
     }
 
-    WebElement getElement(By elementLocator) {
-        try {
-            return wait.until(ExpectedConditions.presenceOfElementLocated(elementLocator));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 
     /**
      * Use this method to simulate typing into an element, which may set its value
@@ -170,9 +162,8 @@ public class AbstractScreen {
      * @param y y-coordinates
      */
     public void pressByCoordinates(int x, int y) {
-        new TouchAction(driver)
-                .press(point(x, y))
-                .perform();
+        TouchAction touchAction=new TouchAction(driver);
+        touchAction.longPress(point(x, y)).release().perform();
     }
 
     /**

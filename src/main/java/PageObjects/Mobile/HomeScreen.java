@@ -41,9 +41,6 @@ public class HomeScreen extends AbstractScreen {
     @AndroidFindBy(accessibility = "waitingButtonTestCD")
     private MobileElement showProgressButton;
 
-    @AndroidFindBy(id = "io.selendroid.testapp:id/input_adds_check_box")
-    private MobileElement acceptAddsCheckBox;
-
     @AndroidFindBy(accessibility = "visibleButtonTestCD")
     private MobileElement displayTextViewButton;
 
@@ -62,9 +59,6 @@ public class HomeScreen extends AbstractScreen {
     @AndroidFindBy(id = "io.selendroid.testapp:id/topLevelElementTest")
     private MobileElement focusOnLayoutButton;
 
-    @AndroidFindBy(xpath = "//*[@text='Show Progress Bar for a while']")
-    private MobileElement showProgressBarButton;
-
     @AndroidFindBy(id = "android:id/progress")
     private MobileElement showProgressBar;
 
@@ -82,6 +76,9 @@ public class HomeScreen extends AbstractScreen {
 
     @AndroidFindBy(xpath = "//*[@text='Close app']")
     private MobileElement closeAppButton;
+
+    @AndroidFindBy(id = "android:id/aerr_restart")
+    private MobileElement openAppAgain;
 
     public boolean isWelcomeTextPresent() {
         return isElementPresent(welcomeText);
@@ -111,10 +108,6 @@ public class HomeScreen extends AbstractScreen {
         return isElementPresent(showProgressButton);
     }
 
-    public boolean isAcceptAddsCheckBoxPresent() {
-        return isElementPresent(acceptAddsCheckBox);
-    }
-
     public boolean isDisplayTextViewButtonPresent() {
         return isElementPresent(displayTextViewButton);
     }
@@ -125,10 +118,6 @@ public class HomeScreen extends AbstractScreen {
 
     public boolean isDisplayWindowPopupButtonPresent() {
         return isElementPresent(displayWindowPopupButton);
-    }
-
-    public boolean isUnhandledExceptionButtonPresent() {
-        return isElementPresent(unhandledExceptionButton);
     }
 
     public boolean isThrowExceptionTextBoxPresent() {
@@ -180,11 +169,9 @@ public class HomeScreen extends AbstractScreen {
     }
 
     public void dismissPopUpWindow() {
-        pressByCoordinates(757,1434);
-    }
-
-    public boolean isPopUpWindowPresent() {
-        return isElementPresent(popUpWindow);
+        int x=throwExceptionTextBox.getLocation().getX();
+        int y=throwExceptionTextBox.getLocation().getY();
+        pressByCoordinates(x+757,y);
     }
 
     public void clickThrowExceptionButton() {
@@ -201,5 +188,9 @@ public class HomeScreen extends AbstractScreen {
 
     public boolean isAppStoppingAlertPresent() {
         return isElementPresent(appKeepStoppingAlert);
+    }
+
+    public void openAppAgain() {
+        openAppAgain.click();
     }
 }
