@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Selendroid-Android-Test-Suite" parallel="tests" thread-count="1">
+<suite name="Selendroid-JQuery-ReqRes-Suite" parallel="tests" thread-count="1">
     <test name="MobileTest">
         <classes>
             <class name="Selendroid.Runner.CucumberRunner"/>
