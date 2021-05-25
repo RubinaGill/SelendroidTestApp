@@ -1,6 +1,6 @@
 package Selendroid.Steps.API;
 
-import Selendroid.Runner.CucumberRunner;
+import Selendroid.Steps.TestContext;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
@@ -18,14 +18,15 @@ import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
 import static org.testng.Assert.assertEquals;
 
-public class APISteps extends CucumberRunner {
+public class APISteps  {
+
     private Response response;
     private String path;
     private JSONParser jsonParser = new JSONParser();
 
     @When("the users endpoint exists")
     public void the_user_endpoint_exists() {
-        RestAssured.baseURI = config.getProperty("BASE_URL");
+        RestAssured.baseURI = TestContext.config.getProperty("BASE_URL");
     }
 
     @When("user sends Get API request of user from page {int}")

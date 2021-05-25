@@ -1,5 +1,5 @@
 @API
-Feature:verify response of user API
+Feature:ReqRes User API Testing
 
   @GetUser
   Scenario: validate first name from API response

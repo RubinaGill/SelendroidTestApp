@@ -1,13 +1,12 @@
 package Selendroid.Steps.Mobile;
 
 import PageObjects.Mobile.CarWebViewScreen;
-import Selendroid.Runner.CucumberRunner;
+import Selendroid.Steps.TestContext;
 import io.cucumber.java.en.Then;
 import org.testng.Assert;
 
-public class CarWebViewInteractionSteps extends CucumberRunner {
-    CarWebViewScreen carWebViewScreen = screenObjectManager.getCarWebViewScreen();
-  // CarWebViewScreen carWebViewScreen = new CarWebViewScreen(driver);
+public class CarWebViewInteractionSteps {
+    CarWebViewScreen carWebViewScreen = TestContext.screenObjectManager.getCarWebViewScreen();
 
     @Then("user verifies the title as {string}")
     public void user_verifies_the_title_as(String expectedTitle) {

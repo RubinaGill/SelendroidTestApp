@@ -1,5 +1,5 @@
-@HomeScreen
-Feature: Home Screen
+@Mobile
+Feature: Selendroid Application Functional Testing
 
   @HomeScreenElements
   Scenario: Validate elements of home screen
@@ -70,13 +70,12 @@ Feature: Home Screen
     Then user is able to dismiss the popup
 
   @UnhandledException
-  Scenario: Validate user is able to dismiss pop-up window
+  Scenario: Validate user is able to generate unhandled exception
     Given user launches the app and is on home screen
     When user taps on Press to throw unhandled exception button
     Then user app is stopped
 
   @UnhandledCustomException
-  Scenario: Validate user is able to dismiss pop-up window
+  Scenario: Validate user is able to generate unhandled custom exception
     Given user launches the app and is on home screen
-    When user types 'test' to throw unhandled exception button
-    Then user app keeps stopping
+    Then user types 'test' to throw unhandled exception button

@@ -8,6 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+/**
+ * This class contains methods representing user interactions on Web View Screen
+ */
 public class CarWebViewScreen extends AbstractScreen {
     @FindBy(id = "name_input")
     private WebElement enterNameTextBox;
@@ -58,7 +61,7 @@ public class CarWebViewScreen extends AbstractScreen {
 
     public boolean validateUserNameAndPreferredCar(String expectedUserName, String expectedPreferredCar) {
         String actualText = getText(selectedDetailsText);
-        return actualText.contains(expectedUserName) && actualText.contains(expectedUserName);
+        return actualText.contains(expectedUserName) && actualText.contains(expectedPreferredCar);
     }
 
     public void clickOnStartAgainLink() {

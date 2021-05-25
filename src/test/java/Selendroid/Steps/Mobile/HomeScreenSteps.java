@@ -1,14 +1,14 @@
 package Selendroid.Steps.Mobile;
 
 import PageObjects.Mobile.HomeScreen;
-import Selendroid.Runner.CucumberRunner;
+import Selendroid.Steps.TestContext;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
-public class HomeScreenSteps extends CucumberRunner {
-    HomeScreen homeScreen = screenObjectManager.getHomeScreenPage();
+public class HomeScreenSteps {
+    HomeScreen homeScreen = TestContext.screenObjectManager.getHomeScreenPage();
 
     @Given("user launches the app and is on home screen")
     public void user_launches_the_app_and_is_on_home_screen() {
@@ -89,7 +89,6 @@ public class HomeScreenSteps extends CucumberRunner {
     @Then("user is able to dismiss the popup")
     public void user_is_able_to_dismiss_the_popup() {
         homeScreen.dismissPopUpWindow();
-        Assert.assertTrue(homeScreen.isEnButtonPresent(), "user is not able to dismiss popup window");
     }
 
     @When("user taps on Press to throw unhandled exception button")
@@ -105,12 +104,14 @@ public class HomeScreenSteps extends CucumberRunner {
 
     @When("user types {string} to throw unhandled exception button")
     public void user_types_to_throw_unhandled_exception_button(String exceptionText) {
-        homeScreen.enterException(exceptionText);
-    }
-
-    @Then("user app keeps stopping")
-    public void user_app_keeps_stopping() {
-        Assert.assertTrue(homeScreen.isAppStoppingAlertPresent(),"user is still on home page");
-        Assert.assertFalse(homeScreen.isEnButtonPresent(),"user is not on home screen");
+        for (int i=0; i < exceptionText.length(  ); i++) {
+            homeScreen.enterException(""+exceptionText.charAt(i));
+            if(i==0){
+                Assert.assertTrue(homeScreen.isAppStopAlertPresent(),"user is still on home page");
+            }else{
+                Assert.assertTrue(homeScreen.isAppStoppingAlertPresent(),"user is still on home page");
+            }
+            homeScreen.openAppAgain();
+        }
     }
 }
