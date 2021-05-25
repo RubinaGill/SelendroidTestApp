@@ -1,5 +1,5 @@
 @Mobile
-Feature: Home Screen
+Feature: Selendroid Application Functional Testing
 
   @HomeScreenElements
   Scenario: Validate elements of home screen

@@ -1,5 +1,5 @@
 @Web
-Feature:perform actions on webElements
+Feature: JQuery Web Application Functional Testing
 
   @DragComponent
   Scenario: user is able to drag component

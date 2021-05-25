@@ -2,10 +2,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
 <suite name="Selendroid-JQuery-ReqRes-Suite">
-    <test name="ApiTest">
+    <test name="Regression">
         <classes>
-            <class name="Selendroid.Runner.CucumberRunner">
-            </class>
+            <class name="Selendroid.Runner.CucumberRunner"/>
         </classes>
     </test>
 </suite>
